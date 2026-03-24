@@ -3,30 +3,32 @@
 <body>
 
 <h2>Order Form</h2> 
+  
+<!-- onsumbit calls printReceipt() and prevents refresh -->
 
 <form onsubmit="return printReceipt();"> 
-  <label for="fname">Full name:</label> 
+  <label for="fname">Full name:</label>   <!--full name input -->
   <input type="text" id="fname" name="fname"><br>
-  <label for="gs">Grade & Section:</label> 
+  <label for="gs">Grade & Section:</label>   <!--Grade & Section with placeholders  -->
   <input placeholder = "N/A for F&S" type="text" id="gs" name="gs"><br><br><br>
-  
-  <label for="fs">Food:</label> 
+  <!--  -->
+  <label for="fs">Food:</label>  <!--food input (dropdown)-->
  <select name="food" id="fs">
   <option value="Chicken Meal">Chicken Meal (₱75)</option>
   <option value="Pork Meal">Pork Meal (₱85)</option>
   <option value="Beef Meal">Beef Meal (₱105)</option>
 </select><br>
 
-  <label for="qty">Quantity (max of 5):</label> 
+  <label for="qty">Quantity (max of 5):</label>  <!--quantity input with min/max  -->
   <input type="number" id="qty" name="quantity" min="0" max="5"><br><br>
   
-  <label for="customer">Customer Type:</label><br> 
+  <label for="customer">Customer Type:</label><br>   <!-- input customer type (dropdown)-->
   <select name="customer" id="customer">
   <option value="student">Student</option>
   <option value="faculty/staff">Faculty/Staff</option>
 </select><br><br>
 
-  <input type="submit" value="Place Order"> 
+  <input type="submit" value="Place Order">  <!-- submit button -->
 
 <div id="order"></div> 
 
