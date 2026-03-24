@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Order Form</h2> 
+
+<form onsubmit="return printReceipt();"> 
+  <label for="fname">Full name:</label> 
+  <input type="text" id="fname" name="fname"><br>
+  <label for="gs">Grade & Section:</label> 
+  <input placeholder = "N/A for F&S" type="text" id="gs" name="gs"><br><br><br>
+  
+  <label for="fs">Food:</label> 
+ <select name="food" id="fs">
+  <option value="Chicken Meal">Chicken Meal (₱75)</option>
+  <option value="Pork Meal">Pork Meal (₱85)</option>
+  <option value="Beef Meal">Beef Meal (₱105)</option>
+</select><br>
+
+  <label for="qty">Quantity (max of 5):</label> 
+  <input type="number" id="qty" name="quantity" min="0" max="5"><br><br>
+  
+  <label for="customer">Customer Type:</label><br> 
+  <select name="customer" id="customer">
+  <option value="student">Student</option>
+  <option value="faculty/staff">Faculty/Staff</option>
+</select><br><br>
+
+  <input type="submit" value="Place Order"> 
+
+<div id="order"></div> 
+
+<script>
+function printReceipt() { // prints receipt when form is sumbitted
+// get values from inputs
+  let name = document.getElementById("fname").value;
+  let gs = document.getElementById("gs").value;
+  let food = document.getElementById("fs").value;
+  let qty = parseInt(document.getElementById("qty").value);
+  let customer = document.getElementById("customer").value;
+
+  // calculate subtotal, discount, and total
+  let subtotal = calculateSubtotal(food, qty);
+  let discount = calculateDiscount(subtotal, customer);
+  let total = calculateTotal(subtotal, discount);
+
+  // display order summary 
+  document.getElementById("order").innerHTML =
+    "<h2>Order Summary</h2>" +
+    "Name: " + name + "<br>" +
+    "Grade & Section: " + gs + "<br>" +
+    "Order: " + food + "<br>" +
+    "Quantity: " + qty + "<br>" +
+    "Subtotal:  PHP " + subtotal + "<br>" +
+    "Discount: PHP " + discount + "<br>" +
+    "Total: PHP " + total + "<br><br>" +
+    "Thank you for your patronage!";
+
+  return false; // prevent form refresh
+}
+// calculates subtotal based on food choice and quantity
+function calculateSubtotal(order, quantity) {
+  let price = 0;
+
+  switch (order) {
+    case "Chicken Meal":
+      price = 75;
+      break;
+    case "Pork Meal":
+      price = 85;
+      break;
+    case "Beef Meal":
+      price = 105;
+      break;
+  }
+
+  return price * quantity; // multiply price by quantity
+}
+
+function calculateDiscount(total, custType) { //calculate discount based on customer type
+  let discount = 0;
+
+  if (custType === "student") {
+    discount = total * 0.20;  
+  }
+
+  return discount;
+}
+
+function calculateTotal(subtotal, discount) { // calculate total after discount
+  return subtotal - discount;
+}
+</script>
+
+</body>
+</html>
